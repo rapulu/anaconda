@@ -12,7 +12,7 @@ import (
 )
 
 const (
-	BaseUrlUserStream = "https://userstream.twitter.com/1.1"
+	BaseUrlUserStream = "https://api.twitter.com/1.1/account_activity/all/"
 	BaseUrlSiteStream = "https://sitestream.twitter.com/1.1"
 	BaseUrlStream     = "https://stream.twitter.com/1.1"
 )
@@ -286,8 +286,8 @@ func (a TwitterApi) newStream(urlStr string, v url.Values, method int) *Stream {
 	return &stream
 }
 
-func (a TwitterApi) UserStream(v url.Values) (stream *Stream) {
-	return a.newStream(BaseUrlUserStream+"/user.json", v, _GET)
+func (a TwitterApi) UserStream(v url.Values, user string) (stream *Stream) {
+	return a.newStream(BaseUrlUserStream+user+"/webhooks.json", v, _GET)
 }
 
 func (a TwitterApi) PublicStreamSample(v url.Values) (stream *Stream) {
